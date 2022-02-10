@@ -1,0 +1,30 @@
+.oneAreaEnabled {
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    color: black;
+}
+
+.oneAreaDisabled {
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
+    color: lightgrey;
+}
+
+.area {
+    border-radius: 4px;
+}
+
+.container {
+    width: 80%;
+    height: 50%;
+    top: 10em;
+    margin-left: 10%;
+    margin-right: 10%;
+    position: relative;
+}
+
+.enable {
+    margin-bottom: 1em;
+}

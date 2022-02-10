@@ -1,0 +1,77 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment: 
+      MYSQL_USER: JEJELEMEILLEUR
+      MYSQL_PASSWORD: HARRAULTDPR
+      MYSQL_DATABASE: area_db
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PORT: 3306
+      MYSQL_HOST: mysql
+    restart: unless-stopped
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+
+  phpmyadmin:
+    depends_on: 
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+    links:
+      - mysql:mysql
+    ports:
+      - 8088:80
+    restart: always
+
+  server:
+    depends_on: 
+      - mysql
+    build: ./serv
+    image: nodeserv:dev
+    environment: 
+      MYSQL_USER: JEJELEMEILLEUR
+      MYSQL_PASSWORD: HARRAULTDPR
+      MYSQL_DATABASE: area_db
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PORT: 3306
+      MYSQL_HOST: mysql
+      WAIT_HOSTS: mysql:3306
+    volumes:
+      - ./serv:/server
+      - /server/node_modules
+    ports:
+      - 8080:3001
+
+  client-mobile:
+    build: 
+      context: ./front
+      dockerfile: ./AreaFrontMobile/Dockerfile
+    image: client-mobile:dev
+    volumes:
+      - ./front/AreaFrontMobile:/client-mobile
+      - /client-mobile/node_modules
+      - apk_release:/apk_release
+
+  client-web:
+    depends_on: 
+      - client-mobile
+      - server
+    build:
+      context: ./front
+      dockerfile: ./area-front-web/Dockerfile
+    image: client-web:dev
+    volumes:
+      - ./front/area-front-web:/client-web
+      - /client-web/node_modules
+      - apk_release:/apk_release
+    ports:
+      - 8081:3000
+
+volumes:
+  apk_release:

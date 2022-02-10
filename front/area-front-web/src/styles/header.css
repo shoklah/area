@@ -1,0 +1,38 @@
+.main-navbar {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    color: white;
+    background-color: #54d92a;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 4em;
+    white-space: nowrap;
+
+}
+
+.button_disconnect {
+    width: 100px;
+    height: 3em;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.button_areas {
+    width: 100px;
+    height: 3em;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.button_home {
+    width: 100px;
+    height: 3em;
+    position: fixed;
+    top: 10px;
+    left: 120px;
+}
